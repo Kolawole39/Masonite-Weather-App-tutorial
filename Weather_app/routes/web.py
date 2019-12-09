@@ -6,5 +6,5 @@ ROUTES = [
     Get('/', 'WelcomeController@show').name('welcome'),
 
     #Weather App
-    Get('/weather', 'Controller@show'),
+    Get('/weather', 'WeatherController@show'),
 ]
