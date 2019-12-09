@@ -40,16 +40,19 @@
 
                 </div>
                 <div class="column is-4">
-                    <div class="field">
-                        <div class="control">
-                            <input class="input is-info is-rounded is-focused" type="text" placeholder="Add city">
+                    <form action="/weather/add">
+                        {{ csrf_field }}
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-info is-rounded is-focused" type="text" placeholder="Add city">
+                            </div>
                         </div>
-                    </div>
-                    <div class="field has-item-centered">
-                        <div class="control">
-                            <button class="button is-rounded is-outlined is-info">Add City</button>
+                        <div class="field has-item-centered">
+                            <div class="control">
+                                <button class="button is-rounded is-outlined is-info">Add City</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
