@@ -17,4 +17,4 @@ class WeatherController(Controller):
         self.request = request
 
     def show(self, view: View):
-        pass
+        return view.render('weather')
