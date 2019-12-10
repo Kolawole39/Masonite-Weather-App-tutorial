@@ -38,7 +38,7 @@ class WeatherController(Controller):
             weather_data.append(weather)
         return view.render('weather', {'weather_data':weather_data })
     
-    def store(self, request: Request):
+    def store(self, request: Request, view : View):
         #Before saving city in our database, we must ask our API if the city exitsts
         API_KEY = '83c2a4b1cd7f54c707c77b0aa0ad102d'
 
@@ -49,10 +49,10 @@ class WeatherController(Controller):
         city_weather = requests.get(url.format(city,API_KEY)).json()
 
         if city_weather['cod'] == '404':
-            return city_weather['message']
+            return request.redirect('/weather')
         else:
             City.create(
             name = request.input("name")
             )
-
-        return 'City Added!'
+        
+        return request.redirect('/weather')
