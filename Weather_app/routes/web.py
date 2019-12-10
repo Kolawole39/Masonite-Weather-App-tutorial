@@ -3,9 +3,10 @@
 from masonite.routes import Get, Post
 
 ROUTES = [
-    Get('/', 'WelcomeController@show').name('welcome'),
+    #Get('/', 'WelcomeController@show').name('welcome'),
 
     #Weather App
-    Get('/weather', 'WeatherController@show'),
-    Post('/weather/add','WeatherController@store'),
+    Get('/', 'WeatherController@show'),
+    Post('/add','WeatherController@store'),
+    Get('/@id/delete','WeatherController@delete')
 ]

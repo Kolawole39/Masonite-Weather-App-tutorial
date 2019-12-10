@@ -29,6 +29,7 @@ class WeatherController(Controller):
             city_weather = requests.get(url.format(city.name,API_KEY)).json()
         #request data in json and then convert it in python data
             weather = {
+                    'id':city.id,
                     'city' : city.name,
                     'temperature' : city_weather['main']['temp'],
                     'description' : city_weather['weather'][0]['description'],
@@ -49,10 +50,17 @@ class WeatherController(Controller):
         city_weather = requests.get(url.format(city,API_KEY)).json()
 
         if city_weather['cod'] == '404':
-            return request.redirect('/weather')
+            return request.redirect('/')
         else:
             City.create(
             name = request.input("name")
             )
         
-        return request.redirect('/weather')
+        return request.redirect('/')
+
+    def delete(self, request: Request):
+        city = City.find(request.param('id'))
+
+        city.delete()
+
+        return request.redirect('/')
