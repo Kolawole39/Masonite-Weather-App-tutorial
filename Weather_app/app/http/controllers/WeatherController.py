@@ -19,16 +19,40 @@ class WeatherController(Controller):
 
     def show(self, view: View):
         cities = City.all()
+
         API_KEY = '83c2a4b1cd7f54c707c77b0aa0ad102d'
-        cities_weather = []
 
-        url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}'
+        url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}' 
 
-        return view.render('weather',{'cities':cities})
+        weather_data = []    
+        for city in cities:
+            city_weather = requests.get(url.format(city.name,API_KEY)).json()
+        #request data in json and then convert it in python data
+            weather = {
+                    'city' : city.name,
+                    'temperature' : city_weather['main']['temp'],
+                    'description' : city_weather['weather'][0]['description'],
+                    'icon' : city_weather['weather'][0]['icon']
+                }
+
+            weather_data.append(weather)
+        return view.render('weather', {'weather_data':weather_data })
     
-    def store(self, request: Request, view:View):
-        City.create(
-            name = request.input('name')
-        )
+    def store(self, request: Request):
+        #Before saving city in our database, we must ask our API if the city exitsts
+        API_KEY = '83c2a4b1cd7f54c707c77b0aa0ad102d'
 
-        return view.render('weather')
+        url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}' 
+
+        city = request.input('name')
+
+        city_weather = requests.get(url.format(city,API_KEY)).json()
+
+        if city_weather['cod'] == '404':
+            return city_weather['message']
+        else:
+            City.create(
+            name = request.input("name")
+            )
+
+        return 'City Added!'

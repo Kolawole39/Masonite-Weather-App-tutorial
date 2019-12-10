@@ -44,7 +44,7 @@
                         {{ csrf_field }}
                         <div class="field">
                             <div class="control">
-                                <input class="input is-info is-rounded is-focused" type="text" placeholder="Add city">
+                                <input class="input is-info is-rounded is-focused" name="name" type="text" placeholder="Add city">
                             </div>
                         </div>
                         <div class="field has-item-centered">
@@ -53,25 +53,27 @@
                             </div>
                         </div>
                     </form>
+                    {% for weather in weather_data %}
                     <div class="box">
                         <article class="media">
                             <div class="media-left">
                                 <figure class="image is-50x50">
-                                    <img src="http://openweathermap.org/img/w/10d.png" alt="Image">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
                                 </figure>
                             </div>
                             <div class="media-content">
                                 <div class="content">
                                     <p>
-                                        <span class="title">Tokyo</span>
+                                        <span class="title">{{ weather.city }}</span>
                                         <br>
-                                        <span class="subtitle">20 C</span>
-                                        <br> Sun at this time
+                                        <span class="subtitle">{{ weather.temperature }}</span>
+                                        <br> {{ weather.description }}
                                     </p>
                                 </div>
                             </div>
                         </article>
                     </div>
+                    {% endfor %}
                 </div>
                 <div class="column">
 
