@@ -22,7 +22,7 @@ class WeatherController(Controller):
         API_KEY = '83c2a4b1cd7f54c707c77b0aa0ad102d'
         cities_weather = []
 
-        url = 'https://api.openweathermap.org/data/2.5/weather?q=london&units=imperial&appid=YOUR_API_KEY'
+        url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}'
 
         return view.render('weather',{'cities':cities})
     
