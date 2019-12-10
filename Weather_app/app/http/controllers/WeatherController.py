@@ -3,7 +3,8 @@
 from masonite.request import Request
 from masonite.view import View
 from masonite.controllers import Controller
-
+from app.City import City
+import requests
 
 class WeatherController(Controller):
     """WeatherController Controller Class."""
@@ -17,4 +18,17 @@ class WeatherController(Controller):
         self.request = request
 
     def show(self, view: View):
+        cities = City.all()
+        API_KEY = '83c2a4b1cd7f54c707c77b0aa0ad102d'
+        cities_weather = []
+
+        url = 'https://api.openweathermap.org/data/2.5/weather?q=london&units=imperial&appid=YOUR_API_KEY'
+
+        return view.render('weather',{'cities':cities})
+    
+    def store(self, request: Request, view:View):
+        City.create(
+            name = request.input('name')
+        )
+
         return view.render('weather')

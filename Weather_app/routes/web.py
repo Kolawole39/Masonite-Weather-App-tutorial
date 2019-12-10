@@ -7,4 +7,5 @@ ROUTES = [
 
     #Weather App
     Get('/weather', 'WeatherController@show'),
+    Post('/weather/add','WeatherController@store'),
 ]
