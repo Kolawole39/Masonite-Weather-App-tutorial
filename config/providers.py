@@ -34,6 +34,7 @@ PROVIDERS = [
     CsrfProvider,
     HelpersProvider,
     ValidationProvider,
+    SchedulerProvider, #here
 
     # Third Party Providers
 
