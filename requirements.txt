@@ -1,1 +1,2 @@
 masonite>=2.2,<2.3
+gunicorn==20.0.4
